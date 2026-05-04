@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMac - Ładowanie</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        .status-text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        #action-button {
+            display: none; /* Ukryty na początku */
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #action-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Prosta animacja pulsowania dla tekstu ładowania */
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="status" class="status-text loading">Ładowanie...</div>
+        <button id="action-button" onclick="startRedirect()">Włącz WebMac</button>
+    </div>
+
+    <script>
+        // Losowanie czasu od 3000ms (3s) do 10000ms (10s)
+        const randomTime = Math.floor(Math.random() * (10000 - 3000 + 1)) + 3000;
+        
+        const statusText = document.getElementById('status');
+        const actionButton = document.getElementById('action-button');
+
+        // Po upływie wylosowanego czasu
+        setTimeout(() => {
+            statusText.style.display = 'none'; // Ukryj napis "Ładowanie"
+            actionButton.style.display = 'inline-block'; // Pokaż przycisk
+        }, randomTime);
+
+        function startRedirect() {
+            // Zmiana tekstu na przycisku i ponowne pokazanie ładowania
+            actionButton.style.display = 'none';
+            statusText.style.display = 'block';
+            statusText.innerText = 'Ładowanie...';
+            
+            // Krótkie opóźnienie przed przekierowaniem (dla efektu)
+            setTimeout(() => {
+                window.location.href = "https://webmac0.github.io/WebMac-Creative/";
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
